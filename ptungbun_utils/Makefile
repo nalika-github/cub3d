@@ -24,7 +24,8 @@ BUILD_DIR		= ./build
 
 # Variable declaration of file
 
-SRCS			=	main.c init_main_struc.c init_ray_data.c
+SRCS			=	main.c init_main_struc.c init_ray_data.c cub3d_render.c bresenham.c move_even.c exit_even.c\
+					rotate.c
 # SRCS			=	main.c init_main_struc.c init_ray_data.c
 HDFS			=	$(HDF:%.h=$(INCS_DIR)/%.h)
 OBJS			=	$(SRCS:%.c=$(BUILD_DIR)/%.o)

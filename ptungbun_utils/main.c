@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:03:26 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/12/20 17:45:41 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/13 12:16:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int	main(int argc, char **argv)
 	(void)argv;
 	get_test_map(&main_struc);
 	// print_test_map(&main_struc);
-	init_main_struc(&main_struc);
 	// if(is_invalid_input(argc, argv, &main_struc))
 	// 	return (cub3d_exit(&main_struc));
-
-	// if(raycaster_loop(&main_struc))
-	// 	return (cub3d_exit(&main_struc));
-	// return (cub3d_exit(&main_struc));
+	init_main_struc(&main_struc);
+	cub3d_render(&main_struc, &(main_struc.viewport));
+	mlx_hook(main_struc.viewport.win_ptr, 2, (1L<<0), move_even, &main_struc);
+	mlx_key_hook(main_struc.viewport.win_ptr, exit_even, &main_struc);
+	mlx_loop(main_struc.viewport.mlx_ptr);
 	return (0);
 }

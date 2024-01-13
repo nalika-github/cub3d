@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:05:31 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/12/24 13:14:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/30 16:31:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,24 @@ void	init_main_struc(t_main *main_struc)
 	main_struc->cur_time = 0;
 	main_struc->old_time = 0;
 	main_struc->one_player = 0;
+	init_viewport(main_struc);
+	main_struc->wall_strip_width = \
+	main_struc->viewport.img.line_len / (N_RAY - 1);
 	init_player(main_struc);
 	init_ray(main_struc);
+}
+
+void	init_viewport(t_main *main_struc)
+{
+	t_vp	*vp;
+
+	vp = &main_struc->viewport;
+	vp->mlx_ptr = mlx_init();
+	vp->win_ptr = mlx_new_window(vp->mlx_ptr, WINDOW_WIDTH, \
+	WINDOW_HEIGHT, "Cub3D");
+	vp->img.mlx_img = mlx_new_image(vp->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	vp->img.addr = mlx_get_data_addr(vp->img.mlx_img, &vp->img.bpp, \
+	&vp->img.line_len, &vp->img.endian);
 }
 
 void	*init_player(t_main *main_struc)
