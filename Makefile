@@ -6,7 +6,7 @@
 #    By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/28 11:19:47 by pnopjira          #+#    #+#              #
-#    Updated: 2023/11/26 23:44:24 by pnopjira         ###   ########.fr        #
+#    Updated: 2024/01/13 21:22:01 by pnopjira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ M		:= make
 
 SRC		:= cub3d.c
 UTILS_1_SRC	:=	$(wildcard pnopjira_utils/*.c)
-UTILS_2_SRC	:=	$(wildcard ptungbun_utils/*.c)
+# UTILS_2_SRC	:=	$(wildcard ptungbun_utils/*.c)
 
 OBJS	:=	$(SRC:.c=.o)\
 			$(UTILS_1_SRC:.c=.o)\

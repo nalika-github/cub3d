@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_main_struc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:05:31 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/12/30 16:31:35 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/14 09:56:25 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycaster.h"
+#include "../includes/raycaster.h"
+#include "../includes/game_setup.h"
+#include "../includes/cub3d.h"
+
 
 void	init_main_struc(t_main *main_struc)
 {
@@ -29,10 +32,10 @@ void	init_viewport(t_main *main_struc)
 	t_vp	*vp;
 
 	vp = &main_struc->viewport;
-	vp->mlx_ptr = mlx_init();
-	vp->win_ptr = mlx_new_window(vp->mlx_ptr, WINDOW_WIDTH, \
+	vp->mlx = mlx_init();
+	vp->win_ptr = mlx_new_window(vp->mlx, WINDOW_WIDTH, \
 	WINDOW_HEIGHT, "Cub3D");
-	vp->img.mlx_img = mlx_new_image(vp->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	vp->img.mlx_img = mlx_new_image(vp->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	vp->img.addr = mlx_get_data_addr(vp->img.mlx_img, &vp->img.bpp, \
 	&vp->img.line_len, &vp->img.endian);
 }

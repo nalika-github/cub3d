@@ -32,8 +32,10 @@ OBJS			=	$(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 # Variable declaration of linking lib
 
-OPENDIR			=	-I./libft -I$(INCS_DIR) -L./libft -Lmlx_linux -L/usr/lib
-LIBLINK			=	-lft -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz
+# OPENDIR			=	-I./libft -I$(INCS_DIR) -L./libft -Lmlx_linux -L/usr/lib
+# LIBLINK			=	-lft -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz
+OPENDIR         =   -I./libft -I$(INCS_DIR) -L./libft -Lmlx -L/usr/lib
+LIBLINK         =   -lft -lmlx -Imlx  -framework OpenGL -framework AppKit
 
 all: $(NAME)
 

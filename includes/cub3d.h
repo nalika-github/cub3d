@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:09:08 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/30 17:08:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/13 21:21:37 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdbool.h>
+# include <OpenGL/gl3.h>
+# include "../mlx/mlx.h"
 # include "get_next_line.h"
+# include "../libft/libft.h"
 # include "game_setup.h"
 
 # define GREEN "\033[0;32m"

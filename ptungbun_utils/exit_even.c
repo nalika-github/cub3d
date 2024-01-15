@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit_even.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:29 by ptungbun          #+#    #+#             */
-/*   Updated: 2024/01/12 16:08:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/14 09:56:00 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycaster.h"
+#include "../includes/raycaster.h"
 
 int	end_programe(t_main *main_struc)
 {
@@ -19,9 +19,9 @@ int	end_programe(t_main *main_struc)
 	vp = main_struc->viewport;
 	free(main_struc->ray);
 	free(main_struc->player);
-	mlx_clear_window(vp.mlx_ptr, vp.win_ptr);
-	mlx_destroy_window(vp.mlx_ptr, vp.win_ptr);
-	mlx_destroy_image(vp.mlx_ptr, vp.img.mlx_img);
+	mlx_clear_window(vp.mlx, vp.win_ptr);
+	mlx_destroy_window(vp.mlx, vp.win_ptr);
+	mlx_destroy_image(vp.mlx, vp.img.mlx_img);
 	exit(0);
 }
 
