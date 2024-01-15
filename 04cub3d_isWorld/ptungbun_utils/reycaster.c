@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:05:52 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/14 20:33:43 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:38:09 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,18 @@ void    minimap_init(t_vp *vars)
     img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->endian);    
 }
 
-int    display(t_main *main)
+int    display_minimap(t_main *main)
 {
 	t_vp *vars;
 	
 	vars = (*main).viewport;
-    background(vars, (*vars).scene->bgc);
-//	cub3d_render(main, main->viewport);
+	background(vars, (*vars).scene->bgc);
     minimap(vars, 0xCCBFC9CA);
+    return (0);
+}
+
+int    display(t_main *main)
+{
+	//cub3d_render(main, main->viewport); // SEGV on unknown address 0x00000000005c (pc 0x00010c6b7fad bp 0x7ffee3551cc0 sp 0x7ffee3551ae0 T0)
     return (0);
 }

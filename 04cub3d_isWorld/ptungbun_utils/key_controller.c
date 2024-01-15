@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:26:34 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/14 20:24:37 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:31:04 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,13 @@ int	bottons(int keycode, t_main *main)
       free_on_exit(main->viewport);
 	   exit(0);
    }
+   else if (keycode == KEY_M)
+	{
+		if (main->on_minimap == 1)
+			main->on_minimap = 0;
+		else
+			main->on_minimap = 1;
+	}
    else if (keycode == KEY_A  || keycode == KEY_LEFT || keycode == KEY_D || keycode == KEY_RIGHT)
          turn_left_or_right(main, keycode);
    else if (keycode == KEY_W || keycode == KEY_S)

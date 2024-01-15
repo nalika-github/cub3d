@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:01:21 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/14 21:50:12 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:40:26 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_main_struct(t_main *main_struc)
 	main_struc->wall_strip_width = 0;
 	main_struc->cur_time = 0;
 	main_struc->old_time = 0;
+	main_struc->on_minimap = 1; // 1 = on, 0 = off and display just wall
 }
 
 int	is_invalid_input(char *argv, t_main *main)
@@ -36,7 +37,7 @@ int	is_invalid_input(char *argv, t_main *main)
 	vars->mini_img == NULL)
 		return (EXIT_FAILURE);
 	init_scene(vars->scene);
-	if (check_invalid_filedata(argv, &vars->scene->map, &vars->scene->p))
+	if (check_invalid_filedata(argv, vars->scene->map, vars->scene->p))
 	{
 		free_scene(&vars->scene);
 		return (EXIT_FAILURE);
@@ -64,19 +65,19 @@ void	del_nl(char **line)
 	}
 }
 
-int	setup_pos(char *dir,int x, int y, t_player **p)
+int	setup_pos(char *dir,int x, int y, t_player *p)
 {
-	if ((*p)->one_player == false)
-		(*p)->one_player = true;
+	if (p->one_player == false)
+		p->one_player = true;
 	else
 		return (EXIT_FAILURE);
-	(*p)->map_x= x;
-	(*p)->map_y = y;
-	(*p)->D = *dir;
+	p->map_x= x;
+	p->map_y = y;
+	p->D = *dir;
 	return (EXIT_SUCCESS);
 }
 
-int	setup_pos_mapx(char **mapdata, int j, t_map **map, t_player **p)
+int	setup_pos_mapx(char **mapdata, int j, t_map *map, t_player *p)
 {
 	int		x;
 	
@@ -92,7 +93,7 @@ int	setup_pos_mapx(char **mapdata, int j, t_map **map, t_player **p)
 			return (EXIT_FAILURE);
 		x++;
 	}
-	if ((int)ft_strlen(mapdata[j]) > (*map)->mapx)
-		(*map)->mapx = ft_strlen(mapdata[j]);
+	if ((int)ft_strlen(mapdata[j]) > map->mapx)
+		map->mapx = ft_strlen(mapdata[j]);
 	return (EXIT_SUCCESS);	
 }

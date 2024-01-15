@@ -6,14 +6,14 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:37:51 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/14 23:30:57 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:59:15 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../libft/libft.h"
 
-int	rd_mapdata(char *maps_path, t_map **map, t_player **p)
+int	rd_mapdata(char *maps_path, t_map *map, t_player *p)
 {
 	int		fd1;
 	int		fd2;
@@ -26,11 +26,9 @@ int	rd_mapdata(char *maps_path, t_map **map, t_player **p)
 	if (err == 0)
 		ck_invalid_map(&err, fd2, map, p);
 	if (err == 0)
-		err = char_to_int_map((*map)->map_original, map);
+		err = char_to_int_map(map->map_original, map);
 	if (err == 0)
-	{	
-		print_map_original((*map)->map_original, map, p);
-	}
+		print_map_original(map->map_original, map, p);
 	return (err);
 }
 
@@ -58,9 +56,9 @@ void	init_plan(t_map *plan)
 
 void	init_player(t_player *player)
 {
+	(*player).pos = (t_coor*)malloc(sizeof(t_coor) * 1);
 	(*player).map_x = -1;
 	(*player).map_y = -1;
-	(*player).pos = NULL;
 	(*player).dir.x = 0;
 	(*player).dir.y = 0;
 	(*player).cam_plane.x = 0;

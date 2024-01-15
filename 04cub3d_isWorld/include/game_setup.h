@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 15:31:21 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/14 23:29:04 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:19:49 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ typedef struct s_player
 	t_coor	*pos; //position of player in coordinate system //
 	t_coor	dir; //direction of player //
 	t_coor	cam_plane; //the coordinate of the center of the camera plane //
-	bool	one_player; //
-	char	D; //
-	int		psize; //
+	bool	one_player; //ok
+	char	D; //ok
+	int		psize; //ok
 }	t_player;
 
 typedef struct s_frame
@@ -109,6 +109,7 @@ typedef struct s_main
 	int			wall_strip_width; 
 	double		cur_time;
 	double		old_time;
+	bool		on_minimap;
 }	t_main;	
 
 // typedef struct s_main

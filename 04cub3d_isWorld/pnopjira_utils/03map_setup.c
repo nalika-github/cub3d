@@ -6,17 +6,28 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 09:53:43 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/13 20:56:06 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:44:43 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	char_to_int_map(char **o_map, t_map **plan)
+int set_vp(t_vp *vars)
+{
+	if (explicit_error(init_frame(vars->scene)))
+	 	return (EXIT_FAILURE);
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, vars->scene->w, \
+	vars->scene->h, "isWorld-cub3D");
+	init_vars(vars);
+	minimap_init(vars);
+	return (EXIT_SUCCESS);
+}
+int	char_to_int_map(char **o_map, t_map *plan)
 {
 	int		**n_map;
-	const int	i = (*plan)->mapx;
-	const int	j = (*plan)->mapy;
+	const int	i = plan->mapx;
+	const int	j = plan->mapy;
 	int y;
 	int x;
 
@@ -48,20 +59,20 @@ int	char_to_int_map(char **o_map, t_map **plan)
 		}
 		y++;
 	}
-	(*plan)->map = n_map;
+	plan->map = n_map;
 	return (EXIT_SUCCESS);
 }
 
-int	ck_map_info(t_map **map)
+int	ck_map_info(t_map *map)
 {
-	if ((*map)->map_begin == 0)
+	if (map->map_begin == 0)
 	{
-		(*map)->map_begin = 1;
-		(*map)->mapy++;
+		map->map_begin = 1;
+		(map->mapy)++;
 	}
 	else
 	{
-		(*map)->mapy++;
+		(map->mapy)++;
 	}
 	return (EXIT_SUCCESS);
 }

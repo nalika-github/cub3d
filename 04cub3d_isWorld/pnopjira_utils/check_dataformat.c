@@ -6,13 +6,13 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 05:59:07 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/13 20:56:13 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:15:17 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	init_content(t_list **iden, char **dst, char **src, char *key)
+int	init_content(t_list *iden, char **dst, char **src, char *key)
 {
 	char	*str;
 
@@ -30,12 +30,12 @@ int	init_content(t_list **iden, char **dst, char **src, char *key)
 		if (invalid_color_code(*dst))
 			return (free(*src), EXIT_FAILURE);
 	}
-	key_to_content((void **)iden, key, *dst);
+	key_to_content((void *)iden, key, *dst);
 	free(*src);
 	return (EXIT_SUCCESS);
 }
 
-int	ck_no_so_we_ea(char *tmp, t_list **iden)
+int	ck_no_so_we_ea(char *tmp, t_list *iden)
 {
 	char	*str1;
 	char	*str2;
@@ -58,7 +58,7 @@ int	ck_no_so_we_ea(char *tmp, t_list **iden)
 	return (EXIT_SUCCESS);
 }
 
-int	ck_f_c_color(char *tmp, t_list **iden)
+int	ck_f_c_color(char *tmp, t_list *iden)
 {
 	char	*str1;
 	char	*str2;
@@ -75,27 +75,27 @@ int	ck_f_c_color(char *tmp, t_list **iden)
 	return (EXIT_SUCCESS);
 }
 
-void	ck_data_format(char *tmp, int *err, t_map **map)
+void	ck_data_format(char *tmp, int *err, t_map *map)
 {
 	if (tmp[0] == '\n' && tmp[1] == '\0')
 	{
-		if ((*map)->map_begin == 1)
+		if (map->map_begin == 1)
 			*err = 5;
 		else
 			*err = 0;
 	}
 	else if (!ft_strncmp(tmp, "NO ", 3) || !ft_strncmp(tmp, "SO ", 3) \
 	|| !ft_strncmp(tmp, "WE ", 3) || !ft_strncmp(tmp, "EA ", 3))
-		*err = ck_no_so_we_ea(tmp, &(*map)->iden);
+		*err = ck_no_so_we_ea(tmp, map->iden);
 	else if (!ft_strncmp(tmp, "F ", 2) || !ft_strncmp(tmp, "C ", 2))
-		*err = ck_f_c_color(tmp, &(*map)->iden);
+		*err = ck_f_c_color(tmp, map->iden);
 	else if (ft_strncmp(tmp, "1", 1) == 0 || ft_strncmp(tmp, "0", 1) == 0)
 		*err = ck_map_info(map);
 	else
 		*err = -1;
 }
 
-void	ck_invalid_data(int *err, int fd1, t_map **map)
+void	ck_invalid_data(int *err, int fd1, t_map *map)
 {
 	char	*line;
 	char	*tmp;

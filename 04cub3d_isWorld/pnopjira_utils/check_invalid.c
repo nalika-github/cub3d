@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 06:00:23 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/13 20:56:21 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:39:05 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ int	ck_identify(int *err, t_list *iden)
 	return (EXIT_SUCCESS);
 }
 
-int before_map(t_map **map, int *err)
+int before_map(t_map *map, int *err)
 {
-	if ((*map)->map_begin == true)
+	if (map->map_begin == true)
 	{
-		if (ck_identify(err, (*map)->iden))
+		if (ck_identify(err, map->iden))
 			return (EXIT_FAILURE);
 	}
 	else
-		++(*map)->line_map_begin;
+		++(map->line_map_begin);
 	return (EXIT_SUCCESS);
 }
