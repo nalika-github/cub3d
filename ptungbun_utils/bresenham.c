@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:52:12 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/12/30 18:12:56 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/13 19:33:03 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycaster.h"
+#include "../includes/raycaster.h"
 
 void	imgpixelput(t_image *img, int x, int y, int color)
 {

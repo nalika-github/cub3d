@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move_even.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 13:18:43 by ptungbun          #+#    #+#             */
-/*   Updated: 2024/01/13 18:07:42 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/14 09:56:48 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycaster.h"
+#include "../includes/raycaster.h"
 
 int	is_wall_block(t_main *m, int index)
 {
@@ -85,7 +85,7 @@ void	move_forward_or_back(t_main *m, int key)
 		i++;
 	}
 	ft_bzero(vp.img.addr, WINDOW_WIDTH * WINDOW_HEIGHT * vp.img.bpp / 8);
-	mlx_clear_window(vp.mlx_ptr, vp.win_ptr);
+	mlx_clear_window(vp.mlx, vp.win_ptr);
 	cub3d_render(m, &(m->viewport));
 }
 
@@ -113,7 +113,7 @@ void	turn_left_or_right(t_main *m, int key)
 		i++;
 	}
 	ft_bzero(m->viewport.img.addr, WINDOW_WIDTH * WINDOW_HEIGHT * m->viewport.img.bpp / 8);
-	mlx_clear_window(m->viewport.mlx_ptr, m->viewport.win_ptr);
+	mlx_clear_window(m->viewport.mlx, m->viewport.win_ptr);
 	cub3d_render(m, &(m->viewport));
 }
 

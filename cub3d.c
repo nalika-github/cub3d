@@ -6,12 +6,12 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:26:37 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/01 10:32:54 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/13 21:22:23 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "game_setup.h"
+#include "./includes/cub3d.h"
+#include "./includes/game_setup.h"
 
 int	check_invalid_filedata(char *maps_path, t_map **map, t_pos **p)
 {
@@ -67,8 +67,8 @@ int	main(int argc, char **argv)
 		free_scene(&vars.scene);
 		return (EXIT_FAILURE);
 	}
-	else
-		if (raycaster(&vars))
-			return (EXIT_FAILURE);
+	// else
+	// 	if (raycaster(&vars))
+	// 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

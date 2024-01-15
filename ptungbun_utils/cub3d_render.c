@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_render.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:46:33 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/12/30 18:16:34 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/14 09:56:08 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycaster.h"
+#include "../includes/raycaster.h"
 
 int	get_color(char *hex)
 {
@@ -62,5 +62,5 @@ void	cub3d_render(t_main *main_struc, t_vp *vp)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(vp->mlx_ptr, vp->win_ptr, vp->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(vp->mlx, vp->win_ptr, vp->img.mlx_img, 0, 0);
 }

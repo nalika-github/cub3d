@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_setup.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 15:31:21 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/24 13:14:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/14 09:55:42 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_ray
 	double	rdy; //initial step y ray distance + total step rdy
 	double	step_rdx; //step x ray distance
 	double	step_rdy; //step y ray distance
+	double	lcpd; //local_cam_plane_dist
 	int		step_side_x; // the indicator to define step in x direction
 	int		step_side_y; // the indicator to define step in y direction
 	bool	wall_hit_side; // if hit N or S wall_hit_side = 0, if hit E or W wall_hit_side = 1
@@ -61,6 +62,8 @@ typedef struct s_ray
 	int		wall_hight; // wall hight distance
 	int		wall_y_start; // start from top
 	int		wall_y_end; // end at bottom
+	int		wall_x_start; // start from left
+	int		wall_x_end; // end at right
 	int		index;
 }	t_ray;
 
@@ -103,10 +106,19 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct s_viewport
+{
+	void	*mlx;
+	void	*win_ptr;
+	t_image	img;
+}	t_vp;
+
 typedef struct s_main
 {
-	t_mlx		main_mlx;
+	t_vp		viewport;
+	t_image		mini_map;
 	int			**map;
+	int			wall_strip_width;
 	t_player	*player;
 	t_ray		*ray;
 	double		cur_time;
