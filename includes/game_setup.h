@@ -108,7 +108,7 @@ typedef struct s_image
 
 typedef struct s_viewport
 {
-	void	*mlx;
+	void	*mlx_ptr;
 	void	*win_ptr;
 	t_image	img;
 }	t_vp;
