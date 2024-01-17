@@ -6,22 +6,47 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:05:31 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/12/30 16:31:35 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:29:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 
-void	init_main_struc(t_main *main_struc)
+void	init_main_struc(t_main *ms)
 {
-	main_struc->cur_time = 0;
-	main_struc->old_time = 0;
-	main_struc->one_player = 0;
-	init_viewport(main_struc);
-	main_struc->wall_strip_width = \
-	main_struc->viewport.img.line_len / (N_RAY - 1);
-	init_player(main_struc);
-	init_ray(main_struc);
+	ms->one_player = 0;
+	init_viewport(ms);
+	init_player(ms);
+	init_ray(ms);
+	ms->tex_so = "../textures/brick.xpm";
+	ms->tex_no = "../textures/grey.xpm";
+	ms->tex_we = "../textures/wood.xpm";
+	ms->tex_ea = "../textures/blue.xpm";
+	ms->viewport.tex_so_img = get_tex_image(&ms->viewport ,ms->tex_so ,\
+	&ms->tex_width, &ms->tex_hight);
+	ms->viewport.tex_no_img = get_tex_image(&ms->viewport ,ms->tex_no ,\
+	&ms->tex_width, &ms->tex_hight);
+	ms->viewport.tex_we_img = get_tex_image(&ms->viewport ,ms->tex_we ,\
+	&ms->tex_width, &ms->tex_hight);
+	ms->viewport.tex_ea_img = get_tex_image(&ms->viewport ,ms->tex_ea ,\
+	&ms->tex_width, &ms->tex_hight);
+	ms->ceiling_color = 8900331;
+	ms->floor_color = 8707586;
+}
+
+t_image	get_tex_image(t_vp *vp, char *path, int *w, int *h)
+{
+	t_image	img;
+
+	img.mlx_img = mlx_xpm_file_to_image(vp->mlx_ptr, path, w, h);
+	if (img.mlx_img == NULL)
+	{
+		printf("image path: %s not found\n", path);
+		return (img);
+	}
+	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, \
+	&img.line_len, &img.endian);
+	return (img);
 }
 
 void	init_viewport(t_main *main_struc)
@@ -35,6 +60,8 @@ void	init_viewport(t_main *main_struc)
 	vp->img.mlx_img = mlx_new_image(vp->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	vp->img.addr = mlx_get_data_addr(vp->img.mlx_img, &vp->img.bpp, \
 	&vp->img.line_len, &vp->img.endian);
+	main_struc->tex_width = TEX_WIDTH;
+	main_struc->tex_hight = TEX_HIGHT;
 }
 
 void	*init_player(t_main *main_struc)

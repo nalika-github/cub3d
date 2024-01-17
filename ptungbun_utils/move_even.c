@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 13:18:43 by ptungbun          #+#    #+#             */
-/*   Updated: 2024/01/13 18:07:42 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:31:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,8 @@ int	is_wall_block(t_main *m, int index)
 		map_x = (int)(p->pos.x - p->dir.x * MOVE_SPEED);
 		map_y = (int)(p->pos.y - p->dir.y * MOVE_SPEED);
 	}
-	printf("pos.x = %f\n", p->pos.x + p->dir.x * MOVE_SPEED);
-	printf("pos.y = %f\n", p->pos.y + p->dir.y * MOVE_SPEED);
-	printf("map_x = %d\n", map_x);
-	printf("map_y = %d\n", map_y);
-	printf("map = %d\n", map[map_y][map_x]);
 	if (map[map_y][map_x] > 0)
-	{
-		printf("hit_the_wall\n");
 		return (1);
-	}
 	return (0);
 }
 
@@ -77,11 +69,12 @@ void	move_forward_or_back(t_main *m, int key)
 	ray = m->ray;
 	move(m, key);
 	i = 0;
-	while(i < N_RAY)
+	while(i < WINDOW_WIDTH)
 	{
 		get_first_step_ray_dist(&ray[i], p);
 		perform_dda(&ray[i], m->map, p);
 		cal_ray_projection_dist_n_wall_hight(&ray[i]);
+		ray_on_wall_pos_cal(m, &ray[i], p);
 		i++;
 	}
 	ft_bzero(vp.img.addr, WINDOW_WIDTH * WINDOW_HEIGHT * vp.img.bpp / 8);
@@ -102,17 +95,19 @@ void	turn_left_or_right(t_main *m, int key)
 	else
 		rotate(m, -1);
 	i = 0;
-	while(i < N_RAY)
+	while(i < WINDOW_WIDTH)
 	{
 		ray[i].raydir.x = p->dir.x + p->cam_plane.x * ray[i].lcpd;
 		ray[i].raydir.y = p->dir.y + p->cam_plane.y * ray[i].lcpd;
-		get_step_ray_dist_n_ray_width(m->wall_strip_width, &ray[i], 1);
+		get_step_ray_dist(&ray[i]);
 		get_first_step_ray_dist(&ray[i], p);
 		perform_dda(&ray[i], m->map, p);
 		cal_ray_projection_dist_n_wall_hight(&ray[i]);
+		ray_on_wall_pos_cal(m, &ray[i], p);
 		i++;
 	}
-	ft_bzero(m->viewport.img.addr, WINDOW_WIDTH * WINDOW_HEIGHT * m->viewport.img.bpp / 8);
+	ft_bzero(m->viewport.img.addr, WINDOW_WIDTH * WINDOW_HEIGHT \
+	* m->viewport.img.bpp / 8);
 	mlx_clear_window(m->viewport.mlx_ptr, m->viewport.win_ptr);
 	cub3d_render(m, &(m->viewport));
 }

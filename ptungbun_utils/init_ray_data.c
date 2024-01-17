@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:23:53 by ptungbun          #+#    #+#             */
-/*   Updated: 2024/01/13 17:48:53 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:29:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,29 @@
 void	*init_ray(t_main *main_struc)
 {
 	int			i;
-	double		local_cam_plane_dist;
 	t_ray		*ray;
 	t_player	*p;
 
-	ray = malloc(sizeof(t_ray) * N_RAY);
+	ray = malloc(sizeof(t_ray) * WINDOW_WIDTH);
 	p = main_struc->player;
 	i = 0;
-	while(i < N_RAY)
+	while(i < WINDOW_WIDTH)
 	{
 		ray[i].index = i;
-		ray[i].lcpd = 2 * ((double)i / (N_RAY - 1)) - 1;
+		ray[i].lcpd = 2 * ((double)i / (WINDOW_WIDTH - 1)) - 1;
 		ray[i].raydir.x = p->dir.x + p->cam_plane.x * ray[i].lcpd;
 		ray[i].raydir.y = p->dir.y + p->cam_plane.y * ray[i].lcpd;
-		get_step_ray_dist_n_ray_width(main_struc->wall_strip_width, &ray[i], 1);
+		get_step_ray_dist(&ray[i]);
 		get_first_step_ray_dist(&ray[i], p);
 		perform_dda(&ray[i], main_struc->map, p);
 		cal_ray_projection_dist_n_wall_hight(&ray[i]);
+		ray_on_wall_pos_cal(main_struc, &ray[i], p);
 		i++;
 	}
 	main_struc->ray = ray;
 }
 
-void	get_step_ray_dist_n_ray_width(int wall_strip_width, t_ray *ray, int is_init)
+void	get_step_ray_dist(t_ray *ray)
 {
 	if(ray->raydir.x == 0)
 		ray->step_rdx = 1e30;
@@ -47,20 +47,6 @@ void	get_step_ray_dist_n_ray_width(int wall_strip_width, t_ray *ray, int is_init
 		ray->step_rdy = 1e30;
 	else
 		ray->step_rdy = fabs(1.0 / ray->raydir.y);
-	if (is_init == 1)
-	{
-		if (ray->index == 0)
-		{
-			ray->wall_x_start = 0;
-			ray->wall_x_end = wall_strip_width / 2;
-			return ;
-		}
-		else
-			ray->wall_x_start = (ray - 1)->wall_x_end;
-		ray->wall_x_end = ray->wall_x_start + wall_strip_width;
-		if (ray->wall_x_end > (N_RAY - 1) * wall_strip_width)
-			ray->wall_x_end = (N_RAY - 1) * wall_strip_width;
-	}
 }
 
 void	get_first_step_ray_dist(t_ray *ray, t_player *p)
