@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 15:31:21 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/13 13:38:54 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:25:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_ray
 	double	rdy; //initial step y ray distance + total step rdy
 	double	step_rdx; //step x ray distance
 	double	step_rdy; //step y ray distance
-	double	lcpd; //local_cam_plane_dist
+	double	lcpd; //local_cam_plane_dist1
 	int		step_side_x; // the indicator to define step in x direction
 	int		step_side_y; // the indicator to define step in y direction
 	bool	wall_hit_side; // if hit N or S wall_hit_side = 0, if hit E or W wall_hit_side = 1
@@ -62,8 +62,7 @@ typedef struct s_ray
 	int		wall_hight; // wall hight distance
 	int		wall_y_start; // start from top
 	int		wall_y_end; // end at bottom
-	int		wall_x_start; // start from left
-	int		wall_x_end; // end at right
+	int		tex_x;
 	int		index;
 }	t_ray;
 
@@ -111,20 +110,28 @@ typedef struct s_viewport
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_image	img;
+	t_image	tex_so_img;
+	t_image	tex_we_img;
+	t_image	tex_ea_img;
+	t_image	tex_no_img;
 }	t_vp;
 
 typedef struct s_main
 {
-	t_vp		viewport;
-	t_image		mini_map;
-	int			**map;
-	int			wall_strip_width;
-	t_player	*player;
-	t_ray		*ray;
-	double		cur_time;
-	double		old_time;
-	bool		one_player;
-	int			ms;
+	t_vp			viewport;
+	t_image			mini_map;
+	t_player		*player;
+	t_ray			*ray;
+	int				**map;
+	bool			one_player;
+	int				floor_color;
+	int				ceiling_color;
+	char			*tex_so;
+	char			*tex_we;
+	char			*tex_ea;
+	char			*tex_no;
+	int				tex_width;
+	int				tex_hight;
 }	t_main;
 
 #endif

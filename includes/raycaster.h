@@ -9,8 +9,8 @@
 /*   Updated: 2024/01/07 02:04:30 by marvin           ###   ########.fr       *//*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef RAYCASTER_H
+# define RAYCASTER_H
 
 # include <math.h>
 # include <fcntl.h>
@@ -27,7 +27,6 @@
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 800
 # define PI 3.141592654
-# define N_RAY 300
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -36,17 +35,20 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 # define MOVE_SPEED 0.02
+# define TEX_WIDTH 64
+# define TEX_HIGHT 64
 
 //init_main_struc.c
 
 void	init_main_struc(t_main *main_struc);
 void	*init_player(t_main *main_struc);
 void	init_viewport(t_main *main_struc);
+t_image	get_tex_image(t_vp *vp, char *path, int *w, int *h);
 
 //init_ray_data.c
 
 void	*init_ray(t_main *main_struc);
-void	get_step_ray_dist_n_ray_width(int wall_strip_width, t_ray *ray, int is_init);
+void	get_step_ray_dist(t_ray *ray);
 void	get_first_step_ray_dist(t_ray *ray, t_player *p);
 void	perform_dda(t_ray *ray, int **map, t_player *p);
 void	cal_ray_projection_dist_n_wall_hight(t_ray *ray);
@@ -71,12 +73,19 @@ int		is_wall_block(t_main *m, int index);
 
 //exit_even.c
 
-int	exit_even(int key, t_main *main_struc);
-int	end_programe(t_main *main_struc);
+int		exit_even(int key, t_main *main_struc);
+int		end_programe(t_main *main_struc);
 
 //rotate.c
 
 void	rotate(t_main *main_struc, double degree);
+
+//texture.c
+
+void	ray_on_wall_pos_cal(t_main *ms, t_ray *ray, t_player *p);
+int		get_tex_color(t_image *tex_img, int x, int y);
+t_image	*get_texture(t_ray ray, t_vp *vp);
+void	draw_wall(t_main *ms ,int x, int *y, t_ray *ray);
 
 #endif
 
